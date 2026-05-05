@@ -8,7 +8,7 @@ pipeline {
             steps {
                 script {
                     // Build the Docker image
-                    sudo sh 'docker build -t $IMAGE_NAME .'
+                    sh 'docker build -t $IMAGE_NAME .'
                 }
             }
         }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Run the Docker container and execute the tests
-                    sudo sh 'docker run --rm $IMAGE_NAME'
+                    sh 'docker run --rm $IMAGE_NAME'
                 }
             }
         }
@@ -24,7 +24,7 @@ pipeline {
     post {
         always {
             // Cleanup: remove any unused images, volumes, etc.
-            sudo sh 'docker system prune -af'
+            sh 'docker system prune -af'
         }
     }
 }
